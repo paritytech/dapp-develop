@@ -1,0 +1,102 @@
+[
+  {
+    "id": "writeContract.title.new",
+    "defaultMessage": "New Solidity Contract"
+  },
+  {
+    "id": "writeContract.title.saved",
+    "defaultMessage": "saved @ {timestamp}"
+  },
+  {
+    "id": "writeContract.details.saved",
+    "defaultMessage": "(saved {timestamp})"
+  },
+  {
+    "id": "writeContract.buttons.new",
+    "defaultMessage": "New"
+  },
+  {
+    "id": "writeContract.buttons.load",
+    "defaultMessage": "Load"
+  },
+  {
+    "id": "writeContract.buttons.save",
+    "defaultMessage": "Save"
+  },
+  {
+    "id": "writeContract.buttons.import",
+    "defaultMessage": "Import Solidity"
+  },
+  {
+    "id": "writeContract.title.main",
+    "defaultMessage": "Write a Contract"
+  },
+  {
+    "id": "writeContract.title.loading",
+    "defaultMessage": "Loading..."
+  },
+  {
+    "id": "writeContract.error.params",
+    "defaultMessage": "An error occurred with the following description"
+  },
+  {
+    "id": "writeContract.title.solidity",
+    "defaultMessage": "Loading Solidity {version}"
+  },
+  {
+    "id": "writeContract.buttons.compile",
+    "defaultMessage": "Compile"
+  },
+  {
+    "id": "writeContract.buttons.deploy",
+    "defaultMessage": "Deploy"
+  },
+  {
+    "id": "writeContract.buttons.optimise",
+    "defaultMessage": "Optimise"
+  },
+  {
+    "id": "writeContract.buttons.autoCompile",
+    "defaultMessage": "Auto-Compile"
+  },
+  {
+    "id": "writeContract.title.selectSolidity",
+    "defaultMessage": "Select a Solidity version"
+  },
+  {
+    "id": "writeContract.compiling.busy",
+    "defaultMessage": "Compiling..."
+  },
+  {
+    "id": "writeContract.compiling.action",
+    "defaultMessage": "Please compile the source code."
+  },
+  {
+    "id": "writeContract.error.noContract",
+    "defaultMessage": "No contract has been found."
+  },
+  {
+    "id": "writeContract.title.contract",
+    "defaultMessage": "Select a contract"
+  },
+  {
+    "id": "writeContract.title.messages",
+    "defaultMessage": "Compiler messages"
+  },
+  {
+    "id": "writeContract.input.metadata",
+    "defaultMessage": "Metadata"
+  },
+  {
+    "id": "writeContract.input.abi",
+    "defaultMessage": "ABI Definition"
+  },
+  {
+    "id": "writeContract.input.code",
+    "defaultMessage": "Bytecode"
+  },
+  {
+    "id": "writeContract.input.swarm",
+    "defaultMessage": "Swarm Metadata Hash"
+  }
+]

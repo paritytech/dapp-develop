@@ -1,0 +1,22 @@
+[
+  {
+    "id": "saveContract.title",
+    "defaultMessage": "save contract"
+  },
+  {
+    "id": "saveContract.name.label",
+    "defaultMessage": "contract name"
+  },
+  {
+    "id": "saveContract.name.hint",
+    "defaultMessage": "choose a name for this contract"
+  },
+  {
+    "id": "saveContract.buttons.cancel",
+    "defaultMessage": "Cancel"
+  },
+  {
+    "id": "saveContract.buttons.save",
+    "defaultMessage": "Save"
+  }
+]

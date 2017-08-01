@@ -1,0 +1,18 @@
+[
+  {
+    "id": "writeContract.type.standardErc20",
+    "defaultMessage": "Standard ERC20 Token Contract"
+  },
+  {
+    "id": "writeContract.type.implementErc20",
+    "defaultMessage": "Implementation of ERC20 Token Contract"
+  },
+  {
+    "id": "writeContract.type.humanErc20",
+    "defaultMessage": "Implementation of the Human Token Contract"
+  },
+  {
+    "id": "writeContract.type.multisig",
+    "defaultMessage": "Implementation of a multisig Wallet"
+  }
+]
