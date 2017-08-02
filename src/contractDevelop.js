@@ -203,7 +203,6 @@ class ContractDevelop extends Component {
 
       tx.done(s => {
         console.log('txDone!');
-        // address is undefined from s (How to become ? => TuT) , error because of triggering while triggering => can makeContract call? between here and next printout
         let address = s.deployed.address;
 
         contract.deployed = bonds.makeContract(address, JSON.parse(abi), [], true);
