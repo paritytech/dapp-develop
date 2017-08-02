@@ -16,6 +16,8 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HappyPack = require('happypack');
+const webpack = require('webpack');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -23,7 +25,7 @@ module.exports = {
   devtool: isProd
     ? '#hidden-source-map'
     : '#source-map',
-  context: __dirname,
+  context: path.join(__dirname, 'src'),
   entry: {
     bundle: './index.js'
   },
@@ -37,12 +39,12 @@ module.exports = {
       {
         test: /\.js$/,
         include: /node_modules\/@parity/,
-        use: [ 'babel-loader' ]
+        use: [ 'happypack/loader?id=babel' ]
       },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        use: [ 'babel-loader' ]
+        use: [ 'happypack/loader?id=babel' ]
       },
       {
         test: /\.json$/,
@@ -76,36 +78,36 @@ module.exports = {
         use: [ 'html-loader', 'markdown-loader' ]
       },
       {
-  	    test: /\.css$/,
-  	    include: /semantic-ui-css/,
-  	    use: [ 'style-loader', 'css-loader' ]
-  	  },
-  	  {
-  	    test: /\.css$/,
-  	    exclude: /semantic-ui-css/,
-  	    use: [
-  	      'style-loader',
-  	      {
-        		loader: 'css-loader',
-        		options: {
-        		  importLoaders: 1,
-        		  localIdentName: '[name]_[local]_[hash:base64:10]',
-        		  minimize: true,
-        		  modules: true
-        		}
-	      },
-	      {
-    		loader: 'postcss-loader',
-    		options: {
-    		  plugins: (loader) => [
-    		    require('postcss-import'),
-    		    require('postcss-nested'),
-    		    require('postcss-simple-vars')
-    		  ]
-		 }
-	      }
-	    ]
-	  },
+        test: /\.css$/,
+        include: /semantic-ui-css/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.css$/,
+        exclude: /semantic-ui-css/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              localIdentName: '[name]_[local]_[hash:base64:10]',
+              minimize: true,
+              modules: true
+            }
+        },
+        {
+        loader: 'postcss-loader',
+        options: {
+          plugins: (loader) => [
+            require('postcss-import'),
+            require('postcss-nested'),
+            require('postcss-simple-vars')
+          ]
+     }
+        }
+      ]
+    },
       {
         test: /\.(png|jpg)$/,
         use: [ {
@@ -156,10 +158,24 @@ module.exports = {
     fs: 'empty'
   },
   plugins: [
+    new HappyPack({
+      id: 'babel',
+      threads: 4,
+      loaders: ['babel-loader']
+    }),
     new HtmlWebpackPlugin({
       filename: '../index.html',
       template: './index.ejs',
       chunks: [ 'bundle' ]
+    }),
+    isProd && new webpack.optimize.UglifyJsPlugin({
+      screwIe8: true,
+      compress: {
+        warnings: false
+      },
+      output: {
+        comments: false
+      }
     })
-  ]
+  ].filter((plugin) => plugin)
 };
