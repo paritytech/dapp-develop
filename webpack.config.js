@@ -39,12 +39,22 @@ module.exports = {
       {
         test: /\.js$/,
         include: /node_modules\/@parity/,
-        use: [ 'happypack/loader?id=babel' ]
+        use: [ {
+          loader: 'happypack/loader',
+          options: {
+            id: 'babel'
+          }
+        } ]
       },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        use: [ 'happypack/loader?id=babel' ]
+        use: [ {
+          loader: 'happypack/loader',
+          options: {
+            id: 'babel'
+          }
+        } ]
       },
       {
         test: /\.json$/,
@@ -113,7 +123,7 @@ module.exports = {
         use: [ {
           loader: 'file-loader',
           options: {
-            name: 'assets/[name].[hash].[ext]'
+            name: 'assets/[name].[ext]'
           }
         } ]
       },
@@ -122,7 +132,7 @@ module.exports = {
         use: [ {
           loader: 'file-loader',
           options: {
-            name: 'fonts/[name][hash].[ext]'
+            name: 'fonts/[name].[ext]'
           }
         } ]
       },
@@ -136,7 +146,7 @@ module.exports = {
         use: [ {
           loader: 'file-loader',
           options: {
-            name: 'assets/[name].[hash].[ext]'
+            name: 'assets/[name].[ext]'
           }
         } ]
       }
@@ -146,8 +156,7 @@ module.exports = {
     ]
   },
   resolve: {
-    alias: {
-    },
+    alias: {},
     modules: [
       path.join(__dirname, 'node_modules')
     ],
