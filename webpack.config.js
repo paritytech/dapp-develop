@@ -160,6 +160,7 @@ module.exports = {
       entry: path.join(__dirname, 'src/serviceWorker.js'),
       publicPath: 'dist/'
     }),
+    isProd && new webpack.optimize.ModuleConcatenationPlugin(),
     isProd && new webpack.optimize.UglifyJsPlugin({
       screwIe8: true,
       sourceMap: true,
