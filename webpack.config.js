@@ -160,6 +160,11 @@ module.exports = {
       entry: path.join(__dirname, 'src/serviceWorker.js'),
       publicPath: 'dist/'
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    }),
     isProd && new webpack.optimize.ModuleConcatenationPlugin(),
     isProd && new webpack.optimize.UglifyJsPlugin({
       screwIe8: true,
