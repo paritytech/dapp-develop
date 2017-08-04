@@ -79,7 +79,7 @@ module.exports = {
             {
               loader: 'css-loader',
               options: {
-                minimize: true
+                minimize: isProd
               }
             }
           ]
@@ -96,8 +96,9 @@ module.exports = {
               options: {
                 importLoaders: 1,
                 localIdentName: '[name]_[local]_[hash:base64:10]',
-                minimize: true,
-                modules: true
+                minimize: isProd,
+                modules: true,
+                sourceMap: isProd
               }
             },
             {
@@ -107,7 +108,8 @@ module.exports = {
                   require('postcss-import'),
                   require('postcss-nested'),
                   require('postcss-simple-vars')
-                ]
+                ],
+                sourceMap: isProd
               }
             }
           ]
