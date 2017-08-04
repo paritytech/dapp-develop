@@ -24,7 +24,9 @@ const webpack = require('webpack');
 const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  devtool: '#source-map',
+  devtool: isProd
+    ? '#source-map'
+    : '#eval',
   context: path.join(__dirname, 'src'),
   entry: {
     dist: './index.js'
@@ -34,7 +36,6 @@ module.exports = {
     publicPath: 'dist/',
     filename: '../dist.js'
   },
-
   module: {
     rules: [
       {
@@ -49,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         use: [ {
           loader: 'happypack/loader',
           options: {
