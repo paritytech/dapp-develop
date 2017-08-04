@@ -16,10 +16,10 @@
 
 import Api from '@parity/api';
 
-const ethereumProvider = window.ethereum || window.parent.ethereum;
+const ethereumProvider = window.ethereum;
 
-if (!ethereumProvider) {
-  throw new Error('Unable to locate EthereumProvider, object not attached');
+if (!window.ethereum) {
+  throw new Error('Unable to locate `window.ethereum`, ensure that the dapp is running is a recent Web3 browser');
 }
 
-export default new Api(ethereumProvider);
+export default new Api(window.ethereum);

@@ -154,7 +154,8 @@ module.exports = {
       chunks: ['dist']
     }),
     new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, 'node_modules/@parity/shared/serviceWorker.js')
+      entry: path.join(__dirname, 'src/serviceWorker.js'),
+      publicPath: 'dist/'
     }),
     isProd && new webpack.optimize.UglifyJsPlugin({
       screwIe8: true,
