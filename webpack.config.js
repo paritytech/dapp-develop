@@ -17,6 +17,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const HappyPack = require('happypack');
 const webpack = require('webpack');
 
@@ -151,6 +152,9 @@ module.exports = {
       filename: '../index.html',
       template: './index.ejs',
       chunks: ['dist']
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, 'node_modules/@parity/shared/serviceWorker.js')
     }),
     isProd && new webpack.optimize.UglifyJsPlugin({
       screwIe8: true,
