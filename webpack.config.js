@@ -18,6 +18,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HappyPack = require('happypack');
 const webpack = require('webpack');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -146,6 +147,9 @@ module.exports = {
       output: {
         comments: false
       }
+    }),
+    new ServiceWorkerWebpackPlugin({
+          entry: path.join(__dirname, 'node_modules/@parity/shared/serviceWorker.js')
     })
   ].filter((plugin) => plugin)
 };

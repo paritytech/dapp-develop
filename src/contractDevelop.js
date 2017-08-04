@@ -37,8 +37,6 @@ import { Debugger, TransactButton, Contract, DropdownBond } from 'parity-reactiv
 import { Bond } from 'oo7';
 import { bonds } from 'oo7-parity';
 
-const traceOptions = [{ text: 'trace', value: 'trace' }, { text: 'vmTrace', value: 'vmTrace' }, { text: 'stateDiff', value: 'stateDiff' }];
-
 @observer
 class ContractDevelop extends Component {
   static propTypes = {
@@ -92,7 +90,7 @@ class ContractDevelop extends Component {
   render () {
     console.log('render contractDevelopment');
     const { sourcecode } = this.store;
-    const { size, resizing } = this.state;
+    const { size, resizing, contract } = this.state;
 
     const annotations = this.store.annotations
       .slice()
@@ -102,9 +100,7 @@ class ContractDevelop extends Component {
       { menuItem: 'Parameters', render: () => <div>
         { this.renderParameters() }
       </div> },
-      { menuItem: 'Debugger', render: () => <Tab panes={ [ { menuItem: 'Trace', render: () => this.renderDebugger() },
-                                                           { menuItem: 'ShowTrace', render: () => <Debugger txBond={ this.store.contract.trace } /> } ] }
-                                            />
+      { menuItem: 'Debugger', render: () => <Debugger contracts={this.store.contracts} />
       }
     ];
 
@@ -190,67 +186,6 @@ class ContractDevelop extends Component {
         </span>
       </span>
     );
-  }
-
-  debugDeploy (contract) {
-    const { contracts, contractIndex } = this.store;
-
-    const bytecode = contract.bytecode;
-    const abi = contract.interface;
-
-    if (!contract.deployed) {
-      let tx = bonds.deployContract(bytecode, JSON.parse(abi));
-
-      tx.done(s => {
-        console.log('txDone!');
-        let address = s.deployed.address;
-
-        contract.deployed = bonds.makeContract(address, JSON.parse(abi), [], true);
-        contract.address = address;
-        contract.trace = new Bond();
-        contract.trace.tie(v => {
-          console.log('TIED to BOND', v);
-          // v.then(console.log);
-        });
-        contracts[contractIndex] = contract;
-        console.log('New Contract', contract, 'index', contractIndex);
-      });
-
-      return tx;
-    } else {
-      return null;
-    }
-  }
-
-  renderDebugger () {
-    const { contracts, compiled } = this.store;
-    let traceMode = new Bond();
-
-    const contractKeys = Object.keys(contracts);
-
-    return (<div>
-      {compiled ? <div>
-        <DropdownBond bond={ traceMode } options={ traceOptions } fluid multiple />
-        {contractKeys.map((name, i) => {
-          let c = contracts[name];
-
-          console.log('contract', c, 'index', i, 'name', name);
-
-          return (
-            <div key={ i }>
-              { c.deployed
-                ? <Contract
-                  contract={ c.deployed ? c.deployed : null }
-                  trace={ c.trace }
-                  traceMode={ traceMode }
-                  contractName={ `Contract ${name} ${c.address}` }
-                  />
-                : <TransactButton content={ `Debug ${name}` } tx={ () => this.debugDeploy(c) } statusText disabled={ c.deployed } />}
-            </div>
-          );
-        })}
-      </div> : null}
-    </div>);
   }
 
   renderActionBar () {

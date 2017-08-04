@@ -65,7 +65,8 @@
     "oo7-parity": "file:./oo7-parity",
     "oo7-react": "file:./oo7-react",
     "parity-reactive-ui": "file:./parity-reactive-ui",
-    "recharts": "0.15.2"
+    "recharts": "0.15.2",
+    "serviceworker-webpack-plugin": "0.2.0"
   },
   "peerDependencies": {}
 }

@@ -112,6 +112,16 @@ export default class ContractDevelopStore {
   useWorker = true;
   solc = {};
 
+  @action fakeComp = () => {
+    const bytecode = '6060604052341561000f57600080fd5b5b336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505b5b61034a806100616000396000f30060606040526000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063b01217f414610049578063ed88c68e1461008b575b600080fd5b341561005457600080fd5b610089600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091908035906020019091905050610095565b005b610093610203565b005b6000806000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614156101fc573073ffffffffffffffffffffffffffffffffffffffff163191508290503073ffffffffffffffffffffffffffffffffffffffff1631831115156101f5578373ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050156101eb577fda69a3259755abc8e7c16903db0bc5573df98cb30e1cf71216f24466a42a42a18484604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a16101f0565b600080fd5b6101fa565b600080fd5b5b5b5b50505050565b61020c3461020f565b5b565b6001805480600101828161022391906102a1565b916000526020600020900160005b33909190916101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550506002805480600101828161028791906102cd565b916000526020600020900160005b83909190915055505b50565b8154818355818115116102c8578183600052602060002091820191016102c791906102f9565b5b505050565b8154818355818115116102f4578183600052602060002091820191016102f391906102f9565b5b505050565b61031b91905b808211156103175760008160009055506001016102ff565b5090565b905600a165627a7a723058207e57d5e29b0e0df37443c6defb1d46126dbe5e962bc62f449bbbef782e92f3600029';
+    const code = '[{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"moveFund","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"donate","outputs":[],"payable":true,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_to","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"}],"name":"fundMoved","type":"event"}]'
+
+    this.contract = { interface:code, bytecode };
+    this.contracts = { donation: this.contract }
+    this.compiled = true;
+    this.compiling = false;
+  }
+
   constructor () {
     this.debouncedCompile = debounce(this.handleCompile, 1000);
   }
