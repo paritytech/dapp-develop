@@ -1,20 +1,9 @@
 var serviceWorkerOption = {
   "assets": [
-<<<<<<< HEAD
-    "/1e1404ff54f5c8e90ec0.worker.js",
-    "/bundle.js"
-=======
-    "dist/87ae7bbadf826d66cd70.worker.js",
-    "dist/icons.674f50d287.eot",
-    "dist/flags.9c74e172f8.png",
-    "dist/icons.af7ae505a9.woff2",
-    "dist/icons.fee66e712a.woff",
-    "dist/icons.b06871f281.ttf",
-    "dist/icons.912ec66d75.svg",
+    "dist/7926f5338037b35b6ae6.worker.js",
     "dist/unknown-64x64.47a5c5b596.png",
     "dist/unknown.09a220f1d3.svg",
     "dist/ethereum-black-64x64.fa56d82ce6.png"
->>>>>>> origin
   ]
 };
         
@@ -77,11 +66,7 @@ var serviceWorkerOption = {
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-<<<<<<< HEAD
-/******/ 	__webpack_require__.p = "";
-=======
 /******/ 	__webpack_require__.p = "dist/";
->>>>>>> origin
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 4);

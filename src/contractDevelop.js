@@ -22,8 +22,9 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { throttle } from 'lodash';
 
-import { Actionbar, ActionbarExport, ActionbarImport, Button, Dropdown, Input, Loading, Page, Toggle, Tab } from '@parity/ui';
-import { CancelIcon, ListIcon, SaveIcon, SendIcon, SettingsIcon } from '@parity/ui/Icons';
+import { Button, Dropdown, Input, Loading, Page, Toggle, Tab } from '@parity/ui';
+import Actionbar from './actionbar';
+import { SendIcon, SettingsIcon } from '@parity/ui/Icons';
 import Editor from '@parity/ui/Editor';
 
 import DeployContract from '@parity/dapp-contracts/src/DeployContract';
@@ -107,7 +108,7 @@ class ContractDevelop extends Component {
         { this.renderDeployModal() }
         { this.renderSaveModal() }
         { this.renderLoadModal() }
-        { this.renderActionBar() }
+        <Actionbar store={this.store } />
         <Page className={ styles.page }>
           <div
             className={ `${styles.container} ${resizing ? styles.resizing : ''}` }
@@ -116,7 +117,7 @@ class ContractDevelop extends Component {
               className={ styles.editor }
               style={ { flex: `${size}%` } }
             >
-              <h2>{ this.renderTitle() }</h2>
+              <h2>{ this.renderTitle(this.store.selectedContract) }</h2>
 
               <Editor
                 ref='editor'
@@ -183,93 +184,6 @@ class ContractDevelop extends Component {
           />
         </span>
       </span>
-    );
-  }
-
-  renderActionBar () {
-    const { sourcecode, selectedContract } = this.store;
-
-    const filename = selectedContract && selectedContract.name
-      ? selectedContract.name
-        .replace(/[^a-z0-9]+/gi, '-')
-        .replace(/-$/, '')
-        .toLowerCase()
-      : 'contract.sol';
-
-    const extension = /\.sol$/.test(filename) ? '' : '.sol';
-
-    const buttons = [
-      <Button
-        icon={ <CancelIcon /> }
-        label={
-          <FormattedMessage
-            id='writeContract.buttons.new'
-            defaultMessage='New'
-          />
-        }
-        key='newContract'
-        onClick={ this.store.handleNewContract }
-      />,
-      <Button
-        icon={ <ListIcon /> }
-        label={
-          <FormattedMessage
-            id='writeContract.buttons.load'
-            defaultMessage='Load'
-          />
-        }
-        key='loadContract'
-        onClick={ this.store.handleOpenLoadModal }
-      />,
-      <Button
-        icon={ <SaveIcon /> }
-        label={
-          <FormattedMessage
-            id='writeContract.buttons.save'
-            defaultMessage='Save'
-          />
-        }
-        key='saveContract'
-        onClick={ this.store.handleSaveContract }
-      />,
-      <ActionbarExport
-        key='exportSourcecode'
-        content={ sourcecode }
-        filename={ `${filename}${extension}` }
-      />,
-      <ActionbarImport
-        key='importSourcecode'
-        title={
-          <FormattedMessage
-            id='writeContract.buttons.import'
-            defaultMessage='Import Solidity'
-          />
-        }
-        onConfirm={ this.store.handleImport }
-        renderValidation={ this.renderImportValidation }
-      />
-    ];
-
-    return (
-      <Actionbar
-        title={
-          <FormattedMessage
-            id='writeContract.title.main'
-            defaultMessage='Write a Contract'
-          />
-        }
-        buttons={ buttons }
-      />
-    );
-  }
-
-  renderImportValidation = (content) => {
-    return (
-      <Editor
-        readOnly
-        value={ content }
-        maxLines={ 20 }
-      />
     );
   }
 
