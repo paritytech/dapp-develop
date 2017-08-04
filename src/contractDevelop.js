@@ -52,8 +52,6 @@ class ContractDevelop extends Component {
     size: 65
   };
 
-  debugDeploy = this.debugDeploy.bind(this);
-
   componentWillMount () {
     const { worker } = this.props;
 
