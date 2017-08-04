@@ -16,20 +16,18 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { observer } from 'mobx-react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { throttle } from 'lodash';
 
 import { Page, Tab } from '@parity/ui';
 import Actionbar from './actionbar';
 import Parameters from './parameters';
 import Editor from '@parity/ui/Editor';
-
-import DeployContract from '@parity/dapp-contracts/src/DeployContract';
-import LoadContract from '../LoadContract';
-import SaveContract from '../SaveContract';
+import SaveModal from './saveModal';
+import LoadModal from './loadModal';
+import DeployModal from './deployModal';
+import Title from './title';
 
 import ContractDevelopStore from './store';
 import styles from './contractDevelop.css';
@@ -102,9 +100,9 @@ class ContractDevelop extends Component {
 
     return (
       <div className={ styles.outer }>
-        { this.renderDeployModal() }
-        { this.renderSaveModal() }
-        { this.renderLoadModal() }
+        <DeployModal store={ this.store } account={ this.props.accounts } />
+        <SaveModal store={ this.store } />
+        <LoadModal store={ this.store } />
         <Actionbar store={ this.store } />
         <Page className={ styles.page }>
           <div
@@ -114,7 +112,7 @@ class ContractDevelop extends Component {
               className={ styles.editor }
               style={ { flex: `${size}%` } }
             >
-              <h2>{ this.renderTitle(this.store.selectedContract) }</h2>
+              <h2><Title store={ this.store } /></h2>
 
               <Editor
                 ref='editor'
@@ -142,98 +140,6 @@ class ContractDevelop extends Component {
           </div>
         </Page>
       </div>
-    );
-  }
-
-  renderTitle () {
-    const { selectedContract } = this.store;
-
-    if (!selectedContract || !selectedContract.name) {
-      return (
-        <FormattedMessage
-          id='writeContract.title.new'
-          defaultMessage='New Solidity Contract'
-        />
-      );
-    }
-
-    return (
-      <span>
-        { selectedContract.name }
-        <span
-          className={ styles.timestamp }
-          title={
-            <FormattedMessage
-              id='writeContract.title.saved'
-              defaultMessage='saved @ {timestamp}'
-              vaules={ {
-                timestamp: (new Date(selectedContract.timestamp)).toISOString()
-              } }
-            />
-          }
-        >
-          <FormattedMessage
-            id='writeContract.details.saved'
-            defaultMessage='(saved {timestamp})'
-            values={ {
-              timestamp: moment(selectedContract.timestamp).fromNow()
-            } }
-          />
-        </span>
-      </span>
-    );
-  }
-
-  renderDeployModal () {
-    const { showDeployModal, contract, sourcecode } = this.store;
-
-    if (!showDeployModal) {
-      return null;
-    }
-
-    return (
-      <DeployContract
-        abi={ contract.interface }
-        accounts={ this.props.accounts }
-        code={ `0x${contract.bytecode}` }
-        source={ sourcecode }
-        onClose={ this.store.handleCloseDeployModal }
-        readOnly
-      />
-    );
-  }
-
-  renderLoadModal () {
-    const { showLoadModal } = this.store;
-
-    if (!showLoadModal) {
-      return null;
-    }
-
-    return (
-      <LoadContract
-        onLoad={ this.store.handleLoadContract }
-        onDelete={ this.store.handleDeleteContract }
-        onClose={ this.store.handleCloseLoadModal }
-        contracts={ this.store.savedContracts }
-        snippets={ this.store.snippets }
-      />
-    );
-  }
-
-  renderSaveModal () {
-    const { showSaveModal, sourcecode } = this.store;
-
-    if (!showSaveModal) {
-      return null;
-    }
-
-    return (
-      <SaveContract
-        sourcecode={ sourcecode }
-        onSave={ this.store.handleSaveNewContract }
-        onClose={ this.store.handleCloseSaveModal }
-      />
     );
   }
 
