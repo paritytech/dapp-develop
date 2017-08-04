@@ -26,7 +26,7 @@ import ContextProvider from '@parity/ui/ContextProvider';
 
 import api from './api';
 
-import ContractDevelop from './contractDevelop';
+import ContractDevelop from './ContractDevelop';
 
 const store = initStore(api, hashHistory);
 
