@@ -20,8 +20,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, List, Portal, Tabs } from '@parity/ui';
-import Editor from '@parity/ui/Editor';
-import { CancelIcon, CheckIcon, DeleteIcon } from '@parity/ui/Icons';
+import Editor from '@parity/ui/lib/Editor';
+import { CancelIcon, CheckIcon, DeleteIcon } from '@parity/ui/lib/Icons';
 
 import styles from './loadContract.css';
 

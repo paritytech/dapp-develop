@@ -21,7 +21,7 @@ import { FormattedMessage } from 'react-intl';
 import store from 'store';
 
 import { sha3 } from '@parity/api/lib/util/sha3';
-import SolidityUtils from '@parity/shared/util/solidity';
+import SolidityUtils from '@parity/shared/lib/util/solidity';
 
 const SOLIDITY_LIST_URL = 'https://rawgit.com/ethereum/solc-bin/gh-pages/bin/list.json';
 const WRITE_CONTRACT_STORE_KEY = '_parity::contractDevelop';
@@ -36,7 +36,7 @@ const SNIPPETS = {
       />
     ),
     id: 'snippet0',
-    sourcecode: require('raw-loader!@parity/shared/contracts/snippets/token.sol')
+    sourcecode: require('raw-loader!@parity/shared/lib/contracts/snippets/token.sol')
   },
   snippet1: {
     name: 'StandardToken.sol',
@@ -47,7 +47,7 @@ const SNIPPETS = {
       />
     ),
     id: 'snippet1',
-    sourcecode: require('raw-loader!@parity/shared/contracts/snippets/standard-token.sol')
+    sourcecode: require('raw-loader!@parity/shared/lib/contracts/snippets/standard-token.sol')
   },
   snippet2: {
     name: 'HumanStandardToken.sol',
@@ -58,7 +58,7 @@ const SNIPPETS = {
       />
     ),
     id: 'snippet2',
-    sourcecode: require('raw-loader!@parity/shared/contracts/snippets/human-standard-token.sol')
+    sourcecode: require('raw-loader!@parity/shared/lib/contracts/snippets/human-standard-token.sol')
   },
   snippet3: {
     name: 'Wallet.sol',
@@ -69,7 +69,7 @@ const SNIPPETS = {
       />
     ),
     id: 'snippet3',
-    sourcecode: require('raw-loader!@parity/shared/contracts/snippets/wallet.sol')
+    sourcecode: require('raw-loader!@parity/shared/lib/contracts/snippets/wallet.sol')
   }
 };
 

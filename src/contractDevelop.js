@@ -23,8 +23,8 @@ import moment from 'moment';
 import { throttle } from 'lodash';
 
 import { Actionbar, ActionbarExport, ActionbarImport, Button, Dropdown, Input, Loading, Page, Toggle, Tab } from '@parity/ui';
-import { CancelIcon, ListIcon, SaveIcon, SendIcon, SettingsIcon } from '@parity/ui/Icons';
-import Editor from '@parity/ui/Editor';
+import { CancelIcon, ListIcon, SaveIcon, SendIcon, SettingsIcon } from '@parity/ui/lib/Icons';
+import Editor from '@parity/ui/lib/Editor';
 
 import DeployContract from '@parity/dapp-contracts/src/DeployContract';
 import LoadContract from './LoadContract';
