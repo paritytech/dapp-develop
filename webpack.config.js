@@ -40,7 +40,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: /node_modules\/@parity\/dapp-/,
+        include: /node_modules\/(@parity\/dapp-|ethereumjs-util)/,
         use: [ {
           loader: 'happypack/loader',
           options: {
@@ -65,10 +65,6 @@ module.exports = {
       {
         test: /\.ejs$/,
         use: ['ejs-loader']
-      },
-      {
-        test: /\.md$/,
-        use: ['html-loader', 'markdown-loader']
       },
       {
         test: /\.css$/,
